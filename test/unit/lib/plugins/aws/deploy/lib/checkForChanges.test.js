@@ -34,7 +34,7 @@ describe('checkForChanges', () => {
       region: 'us-east-1',
     };
     serverless = new Serverless();
-    serverless.config.servicePath = 'my-service';
+    serverless.serviceDir = 'my-service';
     provider = new AwsProvider(serverless, options);
     serverless.setProvider('aws', provider);
     serverless.service.service = 'my-service';
@@ -291,12 +291,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -326,12 +326,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -356,12 +356,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -388,15 +388,15 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/func1.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/func1.zip')
         );
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/func2.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/func2.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -425,12 +425,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -455,12 +455,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(true);
       });
@@ -489,12 +489,12 @@ describe('checkForChanges', () => {
             awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
           );
           expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-            cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+            cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
             dot: true,
             silent: true,
           });
           expect(readFileStub).to.have.been.calledWith(
-            path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/my-service.zip')
+            path.resolve(awsDeploy.serverless.serviceDir, '.serverless/my-service.zip')
           );
           expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(true);
         }
@@ -523,15 +523,15 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/func1.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/func1.zip')
         );
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, '.serverless/func2.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, '.serverless/func2.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(true);
       });
@@ -560,12 +560,12 @@ describe('checkForChanges', () => {
           awsDeploy.serverless.service.provider.compiledCloudFormationTemplate
         );
         expect(globbySyncStub).to.have.been.calledWithExactly(['**.zip'], {
-          cwd: path.join(awsDeploy.serverless.config.servicePath, '.serverless'),
+          cwd: path.join(awsDeploy.serverless.serviceDir, '.serverless'),
           dot: true,
           silent: true,
         });
         expect(readFileStub).to.have.been.calledWith(
-          path.resolve(awsDeploy.serverless.config.servicePath, 'foo/bar/my-own.zip')
+          path.resolve(awsDeploy.serverless.serviceDir, 'foo/bar/my-own.zip')
         );
         expect(awsDeploy.serverless.service.provider.shouldNotDeploy).to.equal(undefined);
       });
@@ -644,7 +644,7 @@ const commonAwsSdkMock = {
 };
 
 const generateMatchingListObjectsResponse = async (serverless) => {
-  const packagePath = `${serverless.config.servicePath}/.serverless`;
+  const packagePath = `${serverless.serviceDir}/.serverless`;
   const artifactNames = await globby(packagePath, { expandDirectories: { extensions: ['zip'] } });
   artifactNames.push('compiled-cloudformation-template.json');
   return {
@@ -670,7 +670,7 @@ const generateMatchingHeadObjectResponse = async (serverless, { Key: key }) => {
   const fileHash = await (async (fileName) => {
     return new Promise((resolve) => {
       const hash = crypto.createHash('sha256');
-      const f = fs.createReadStream(`${serverless.config.servicePath}/.serverless/${fileName}`);
+      const f = fs.createReadStream(`${serverless.serviceDir}/.serverless/${fileName}`);
       f.on('data', (d) => hash.update(d));
       f.on('close', () => resolve(hash.digest('base64')));
     });
@@ -846,7 +846,7 @@ describe('test/unit/lib/plugins/aws/deploy/lib/checkForChanges.test.js', () => {
     // https://github.com/serverless/serverless/blob/11fb14115ea47d53a61fa666a94e60d585fb3a4d/test/unit/lib/plugins/aws/deploy/lib/checkForChanges.test.js#L317-L350
 
     const {
-      fixtureData: { updateConfig, servicePath },
+      fixtureData: { updateConfig, servicePath: serviceDir },
     } = await runServerless({
       fixture: 'checkForChanges',
       command: 'package',
@@ -857,7 +857,7 @@ describe('test/unit/lib/plugins/aws/deploy/lib/checkForChanges.test.js', () => {
 
     let serverless;
     await runServerless({
-      cwd: servicePath,
+      cwd: serviceDir,
       command: 'package',
       lastLifecycleHookName: 'aws:deploy:deploy:checkForChanges',
       env: { AWS_CONTAINER_CREDENTIALS_FULL_URI: 'ignore' },

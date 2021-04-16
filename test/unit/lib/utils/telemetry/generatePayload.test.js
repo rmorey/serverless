@@ -6,7 +6,7 @@ const fs = require('fs');
 const os = require('os');
 const overrideEnv = require('process-utils/override-env');
 
-const generatePayload = require('../../../../../lib/utils/analytics/generatePayload');
+const generatePayload = require('../../../../../lib/utils/telemetry/generatePayload');
 const runServerless = require('../../../../utils/run-serverless');
 const fixtures = require('../../../../fixtures/programmatic');
 
@@ -15,9 +15,9 @@ const versions = {
   '@serverless/enterprise-plugin': require('@serverless/enterprise-plugin/package').version,
 };
 
-describe('lib/utils/analytics/generatePayload', () => {
+describe('lib/utils/telemetry/generatePayload', () => {
   it('Should resolve payload for AWS service', async () => {
-    const { servicePath } = await fixtures.setup('httpApi', {
+    const { servicePath: serviceDir } = await fixtures.setup('httpApi', {
       configExt: {
         functions: {
           withContainer: {
@@ -28,7 +28,7 @@ describe('lib/utils/analytics/generatePayload', () => {
       },
     });
     await fs.promises.writeFile(
-      path.resolve(servicePath, 'package.json'),
+      path.resolve(serviceDir, 'package.json'),
       JSON.stringify({
         dependencies: {
           fooDep: '1',
@@ -46,7 +46,7 @@ describe('lib/utils/analytics/generatePayload', () => {
     );
 
     const { serverless } = await runServerless({
-      cwd: servicePath,
+      cwd: serviceDir,
       command: '-v',
     });
     const payload = await generatePayload(serverless);
